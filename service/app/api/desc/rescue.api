@@ -1,0 +1,130 @@
+syntax = "v1"
+
+info(
+	title: "救援流程管理"
+	desc: "包含救援信息导入，救援信息推送等"
+	author: "qianren"
+	email: "1911401642@qq.com"
+)
+
+type RescueInfo {
+	Id       			int64  `json:"id"`
+	WeiboAccount   		string `json:"weibo_account"`
+	Area     			string `json:"area"`
+	Sex      			string `json:"sex"`
+	Age					string `json:"age"`
+	ReleaseTime     	string `json:"release_time"`
+	MainDemand      	string `json:"main_demand"`
+	RiskLevel			string `json:"risk_level"`
+	Status          	int    `json:"status"`
+	RescueTeacherId 	int    `json:"rescue_teacher_id"`
+	RescueTeacherName 	string `json:"rescue_teacher_name"`
+}
+
+type (
+	AuthReq {
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+	AuthResp {
+		AccessToken  string `json:"access_token"`
+		AccessExpire int64  `json:"access_expire"`
+		RefreshAfter int64  `json:"refresh_after"`
+	}
+)
+
+type (
+	PushReq {
+		WeiboAccount   		string `json:"weibo_account"`
+		Area     			string `json:"area"`
+		Sex      			string `json:"sex"`
+		Age					string `json:"age"`
+		ReleaseTime     	string `json:"release_time"`
+		MainDemand      	string `json:"main_demand"`
+		RiskLevel			string `json:"risk_level"`
+	}
+	PushResp {
+	}
+)
+
+type (
+	PushWithStatusReq {
+		WeiboAccount   		string `json:"weibo_account"`
+		Area     			string `json:"area"`
+		Sex      			string `json:"sex"`
+		Age					string `json:"age"`
+		ReleaseTime     	string `json:"release_time"`
+		MainDemand      	string `json:"main_demand"`
+		RiskLevel			string `json:"risk_level"`
+		Status          	int    `json:"status"`
+	}
+	PushWithStatusResp {
+	}
+)
+type (
+	DestroyTokenReq {
+	}
+	DestroyTokenResp {
+	}
+)
+
+type (
+	GetRescueInfoReq {
+		Page 	int64 `json:"page"`
+		PageSize int64 `json:"page_size"`
+	}
+	GetRescueInfoResp {
+		List  [] RescueInfo `json:"rescue_info"`
+	}
+)
+
+type (
+	GetRescueInfoByAreaReq {
+		Page 	 int64  `json:"page"`
+		PageSize int64  `json:"page_size"`
+		Area     string `json:"area"`
+	}
+	GetRescueInfoByAreaResp {
+		List  [] RescueInfo `json:"rescue_info"`
+	}
+)
+@server(
+	prefix: api/v1
+	group: rescue
+)
+service app-api {
+	@doc "认证"
+	@handler authRescueInfo
+	post /rescue/auth (AuthReq) returns (AuthResp)
+}
+
+@server(
+    prefix: api/v1
+    group: rescue
+    jwt: JwtAuthForPush
+)
+service app-api {
+    @doc "导入救援信息"
+	@handler pushRescueInfo
+	post /rescue/push (PushReq) returns (PushResp)
+	@doc "导入救援信息（含状态）"
+	@handler pushRescueInfoWithStatus
+	post /rescue/pushwithstatus (PushWithStatusReq) returns (PushWithStatusResp)
+	@doc "销毁token"
+	@handler DestroyToken
+	post /rescue/destroytoken (DestroyTokenReq) returns (DestroyTokenResp)
+}
+
+@server(
+    prefix: api/v1
+    group: rescue
+    jwt: JwtAuth
+)
+service app-api {
+	@doc "获取救援信息"
+	@handler getRescueInfo
+	post /rescue/getrescueinfo (GetRescueInfoReq) returns (GetRescueInfoResp)
+	@doc "获取救援信息（按地区）"
+	@handler GetRescueInfoByArea
+	post /rescue/getrescueinfobyarea (GetRescueInfoByAreaReq) returns (GetRescueInfoByAreaResp)
+}

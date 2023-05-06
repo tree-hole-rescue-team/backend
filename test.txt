@@ -1,0 +1,98 @@
+// 存储测试样例
+// 用户样例
+{
+    "mobile": "18258456918",
+    "password": "123456",
+    "username": "方瑜诚",
+    "sex": 0,
+    "email": "1911401642@qq.com",
+    "address": "浙江省杭州市淳安县",
+    "birthday": "2003-08-30"
+}
+
+{
+    "mobile": "18199005086",
+    "password": "123456",
+    "username": "梁强",
+    "sex": 0,
+    "email": "s.twmtnf@qq.com",
+    "address": "青海省凉山彝族自治州双台子区",
+    "birthday": "1992-04-12"
+}
+
+{
+    "mobile": "18158346472",
+    "password": "123456",
+    "username": "侯刚",
+    "sex": 0,
+    "email": "m.melpy@qq.com",
+    "address": "甘肃省恩施土家族苗族自治州尖扎县",
+    "birthday": "2011-05-24"
+}
+
+{
+    "mobile": "18133611498",
+    "password": "123456",
+    "username": "胡娜",
+    "sex": 1,
+    "email": "b.sbwmreiyl@qq.com",
+    "address": "湖北省固原市耀州区",
+    "birthday": "2018-11-03"
+}
+
+{
+    "mobile": "18133611499",
+    "password": "123456",
+    "username": "吴宇贤",
+    "sex": 0,
+    "email": "b.sbwmreiyl@qq.com",
+    "address": "江苏省南通市南桐区",
+    "birthday": "2066-66-66"
+}
+
+
+
+
+// 救援信息
+{
+    "area": "浙江省杭州市淳安县",
+    "sex": "男",
+    "age": "21",
+    "release_time": "2022-10-03 18:41:23",
+    "main_demand": "学习压力大，怎么减少焦虑呢！",
+    "risk_level": "5级",
+    "status": 0,
+    "weibo_account": "https://weibo.com/u/7001420065"
+}
+
+{
+    "area": "浙江省杭州市桐庐县",
+    "sex": "女",
+    "age": "20",
+    "release_time": "2022-10-04 18:41:23",
+    "main_demand": "和家人相处不好",
+    "risk_level": "7级",
+    "status": 0,
+    "weibo_account": "https://weibo.com/u/7001422365"
+}
+
+{
+    "area": "湖北省武汉市洪山区",
+    "sex": "男",
+    "age": "20",
+    "release_time": "2023-3-20 18:41:23",
+    "main_demand": "和家人相处不好",
+    "risk_level": "10级",
+    "status": 0,
+    "weibo_account": "https://weibo.com/u/7001422365"
+}
+
+// 修改报名表或个人信息
+{
+    "mobile": "18258456918",
+    "username": "方瑜诚",
+    "sex": 0,
+    "address": "浙江省杭州市淳安县",
+    "birthday": "2003-08-30",
+    "email": "1911401642@qq.com"
+}

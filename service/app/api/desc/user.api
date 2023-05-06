@@ -1,0 +1,162 @@
+// goctl api go -api user.api -dir ../  --style=goZero
+syntax = "v1"
+
+info(
+	title: "用户"
+	desc: "用户"
+	author: "qianren"
+	email: "1911401642@qq.com"
+)
+
+type User {
+	Id       int64  `json:"id"`
+	OpenId   string `josn:"open_id"`
+	Mobile   string `json:"mobile"`
+	Username string `json:"username"`
+	Sex      int64  `json:"sex"`
+	Email    string `json:"email"`
+	Role     int64  `json:"role"`
+	Rolename string `json:"role_name"`
+	Avatar   string `json:"avatar"`
+	Address  string `json:"address"`
+	Birthday string `json:"birthday"`
+}
+
+type (
+	RegisterReq {
+        Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+        UserName string `json:"username"`
+        Sex      int64  `json:"sex"`
+		Email    string `json:"email"`
+        Address  string `json:"address"`
+        Birthday string `json:"birthday"`
+	}
+	RegisterResp {
+		AccessToken  string `json:"access_token"`
+		AccessExpire int64  `json:"access_expire"`
+		RefreshAfter int64  `json:"refresh_after"`
+		Role         int64  `json:"role"`
+	}
+)
+
+type (
+	LoginReq {
+		Mobile   string `json:"mobile"`
+		Password string `json:"password"`
+	}
+	LoginResp {
+		AccessToken  string `json:"access_token"`
+		AccessExpire int64  `json:"access_expire"`
+		RefreshAfter int64  `json:"refresh_after"`
+		Role         int64  `json:"role"`
+	}
+)
+
+type (
+	WXMiniAuthReq {
+		Code          string `json:"code"`
+		IV            string `json:"iv"`
+		EncryptedData string `json:"encrypted_data"`
+	}
+	WXMiniAuthResp {
+		AccessToken  string `json:"access_token"`
+		AccessExpire int64  `json:"access_expire"`
+		RefreshAfter int64  `json:"refresh_after"`
+	}
+)
+
+type (
+	UserInfoReq {
+	}
+	UserInfoResp {
+		UserInfo User `json:"user_info"`
+	}
+)
+
+type (
+    GetAllApplicantReq {
+		Page 	int64 `json:"page"`
+		PageSize int64 `json:"page_size"`
+    }
+    GetAllApplicantResp {
+ 		List    [] User  `json:"list"`
+    }
+)
+
+type (
+	UploadAvatarReq { // 不用写，直接从r取文件
+	}
+	UploadAvatarResp {
+		url	string `json:"url"`
+	}
+)
+
+type (
+	ImportExcelReq {
+	}
+	ImportExcelResp {
+		List    [] User  `json:"list"`
+	}
+)
+
+type (
+	EditUserInfoReq {
+		Mobile   string `json:"mobile"`
+		Username string `json:"username"`
+		Sex      int64  `json:"sex"`
+		Email    string `json:"email"`
+		Address  string `json:"address"`
+		Birthday string `json:"birthday"`
+	}
+	EditUserInfoResp {
+	}
+)
+
+// ==============> user <============
+// no need login
+@server(
+	prefix: api/v1
+	group: user
+)
+service app-api {
+	@doc "注册"
+	@handler register
+	post /user/register (RegisterReq) returns (RegisterResp)
+	
+	@doc "登录"
+	@handler login
+	post /user/login (LoginReq) returns (LoginResp)
+
+    @doc "微信认证登录"
+	@handler WXMiniAuth
+	post /user/wxMiniAuth (WXMiniAuthReq) returns (WXMiniAuthResp)
+
+	@doc "Excel导入用户账号信息"
+	@handler importExcel
+	post /user/importexcel (ImportExcelReq) returns (ImportExcelResp)
+}
+
+// need login
+@server(
+	prefix: api/v1
+	group: user
+	jwt: JwtAuth
+)
+service app-api {
+	@doc "获取个人信息"
+	@handler userInfo
+	post /user/info (UserInfoReq) returns (UserInfoResp)
+
+	@doc "获取所有申请队员的信息"
+    @handler getAllApplicant
+    post /user/getallapplicant (GetAllApplicantReq) returns (GetAllApplicantResp)
+
+	@doc "上传头像"
+	@handler UploadAvatar
+	post /user/uploadavatar (UploadAvatarReq) returns (UploadAvatarResp)
+
+	@doc "修改个人信息"
+	@handler editUserInfo
+	post /user/edit (EditUserInfoReq) returns (EditUserInfoResp)
+}

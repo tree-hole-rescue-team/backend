@@ -1,0 +1,109 @@
+syntax = "v1"
+
+info(
+	title: "申请表"
+	desc: "申请表"
+	author: "qianren"
+	email: "1911401642@qq.com"
+)
+
+type ApplicationForm {
+	Id       	  int64  `json:"id"`
+    CreateTime	  string `json:"create_time"`
+    UpdateTime    string `json:"upadate_time"`
+	UserId   	  int64  `json:"user_id"`
+	Mobile   	  string `json:"mobile"`
+	Username 	  string `json:"username"`
+	Sex      	  int64  `json:"sex"`
+	Address  	  string `json:"address"`
+	Birthday 	  string `json:"birthday"`
+	Email         string `json:"email"`
+	Status        int64  `json:"status"`
+	Operator_id   int64  `json:"operator_id"`
+	Operator_name string `json:"operator_name"`
+}
+
+type (
+	ApplicationFormReq {
+	}
+	ApplicationFormResp {
+		Form	ApplicationForm	`json:"application_form"`
+	}
+)
+
+type (
+    ApplicationFormsReq {
+		Page 	int64 `json:"page"`
+		PageSize int64 `json:"page_size"`
+    }
+    ApplicationFormsResp {
+ 		List    [] ApplicationForm  `json:"list"`
+    }
+)
+
+type (
+	ProcessReq {
+		ApplicationFormId int64 `json:"application_form_id"`
+		Status	int64 `json:"status"`
+	}
+	ProcessResp {
+		CreateTime	string	`json:"createtime"`
+	}
+)
+
+type (
+	GetByStatusReq {
+		Status	 int64 `json:"status"`
+		Page 	 int64 `json:"page"`
+		PageSize int64 `json:"page_size"`
+	}
+	GetByStatusResp {
+ 		List    [] ApplicationForm  `json:"list"`
+    }
+)
+
+type (
+	EditReq {
+		Mobile   	  string `json:"mobile"`
+		Username 	  string `json:"username"`
+		Sex      	  int64  `json:"sex"`
+		Address  	  string `json:"address"`
+		Birthday 	  string `json:"birthday"`
+		Email         string `json:"email"`
+	}
+	EditResp {
+	}
+)
+
+@server(
+    prefix: api/v1
+    group: application
+    jwt: JwtAuth
+)
+service app-api {
+    @doc (
+		summary: "获取申请表（个人）"
+		description: "需要token，返回个人报名表信息，含姓名、手机号、出生日期、省市、性别、邮箱"
+	)
+	@handler getMyApplication
+	post /application/form (ApplicationFormReq) returns (ApplicationFormResp)
+
+	@doc (
+		summary:"修改报名表"
+		description:"仅限报名表没有审批或者不通过的情况下可以修改，当报名表通过后无法修改。"
+	)
+	@handler editForm
+	post /application/edit (EditReq) returns (EditResp)
+
+	@doc "获取申请表（所有）"
+	@handler getApplication
+	post /application/forms (ApplicationFormsReq) returns (ApplicationFormsResp)
+
+    @doc "审批"
+	@handler process
+	post /application/process (ProcessReq) returns (ProcessResp)
+
+	@doc "获取申请表（状态）"
+	@handler getByStatus
+	post /application/status (GetByStatusReq) returns (GetByStatusResp)
+}

@@ -1,0 +1,1567 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "api/v1/application/edit": {
+      "post": {
+        "summary": "修改报名表",
+        "description": "仅限报名表没有审批或者不通过的情况下可以修改，当报名表通过后无法修改。",
+        "operationId": "editForm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/EditResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EditReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "application"
+        ]
+      }
+    },
+    "api/v1/application/form": {
+      "post": {
+        "summary": "获取申请表（个人）",
+        "description": "需要token，返回个人报名表信息，含姓名、手机号、出生日期、省市、性别、邮箱",
+        "operationId": "getMyApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "application"
+        ]
+      }
+    },
+    "api/v1/application/forms": {
+      "post": {
+        "summary": "获取申请表（所有）",
+        "operationId": "getApplication",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormsResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplicationFormsReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "application"
+        ]
+      }
+    },
+    "api/v1/application/process": {
+      "post": {
+        "summary": "审批",
+        "operationId": "process",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ProcessResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProcessReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "application"
+        ]
+      }
+    },
+    "api/v1/application/status": {
+      "post": {
+        "summary": "获取申请表（状态）",
+        "operationId": "getByStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetByStatusResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetByStatusReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "application"
+        ]
+      }
+    },
+    "api/v1/rescue/auth": {
+      "post": {
+        "summary": "认证",
+        "operationId": "authRescueInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/AuthResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AuthReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "rescue"
+        ]
+      }
+    },
+    "api/v1/rescue/destroytoken": {
+      "post": {
+        "summary": "销毁token",
+        "operationId": "DestroyToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/DestroyTokenResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DestroyTokenReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "rescue"
+        ]
+      }
+    },
+    "api/v1/rescue/getrescueinfo": {
+      "post": {
+        "summary": "获取救援信息",
+        "operationId": "getRescueInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetRescueInfoResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetRescueInfoReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "rescue"
+        ]
+      }
+    },
+    "api/v1/rescue/getrescueinfobyarea": {
+      "post": {
+        "summary": "获取救援信息（按地区）",
+        "operationId": "GetRescueInfoByArea",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetRescueInfoByAreaResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetRescueInfoByAreaReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "rescue"
+        ]
+      }
+    },
+    "api/v1/rescue/push": {
+      "post": {
+        "summary": "导入救援信息",
+        "operationId": "pushRescueInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/PushResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PushReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "rescue"
+        ]
+      }
+    },
+    "api/v1/rescue/pushwithstatus": {
+      "post": {
+        "summary": "导入救援信息（含状态）",
+        "operationId": "pushRescueInfoWithStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/PushWithStatusResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PushWithStatusReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "rescue"
+        ]
+      }
+    },
+    "api/v1/role/change": {
+      "post": {
+        "summary": "更改成员身份",
+        "operationId": "changeRole",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ChangeRoleResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangeRoleReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "role"
+        ]
+      }
+    },
+    "api/v1/role/viewchangelist": {
+      "post": {
+        "summary": "获取某个成员的身份变动信息",
+        "operationId": "roleChangeList",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RoleChangeInfoListResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleChangeInfoListReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "role"
+        ]
+      }
+    },
+    "api/v1/user/edit": {
+      "post": {
+        "summary": "修改个人信息",
+        "operationId": "editUserInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/EditUserInfoResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EditUserInfoReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "api/v1/user/getallapplicant": {
+      "post": {
+        "summary": "获取所有申请队员的信息",
+        "operationId": "getAllApplicant",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetAllApplicantResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetAllApplicantReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "api/v1/user/importexcel": {
+      "post": {
+        "summary": "Excel导入用户账号信息",
+        "operationId": "importExcel",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/ImportExcelResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportExcelReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "api/v1/user/info": {
+      "post": {
+        "summary": "获取个人信息",
+        "operationId": "userInfo",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UserInfoResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserInfoReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "api/v1/user/login": {
+      "post": {
+        "summary": "登录",
+        "operationId": "login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LoginResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LoginReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "api/v1/user/register": {
+      "post": {
+        "summary": "注册",
+        "operationId": "register",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/RegisterResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "api/v1/user/uploadavatar": {
+      "post": {
+        "summary": "上传头像",
+        "operationId": "UploadAvatar",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/UploadAvatarResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadAvatarReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    },
+    "api/v1/user/wxMiniAuth": {
+      "post": {
+        "summary": "微信认证登录",
+        "operationId": "WXMiniAuth",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/WXMiniAuthResp"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WXMiniAuthReq"
+            }
+          }
+        ],
+        "requestBody": {},
+        "tags": [
+          "user"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "ApplicationForm": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "create_time": {
+          "type": "string"
+        },
+        "upadate_time": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "address": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "operator_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "operator_name": {
+          "type": "string"
+        }
+      },
+      "title": "ApplicationForm",
+      "required": [
+        "id",
+        "create_time",
+        "upadate_time",
+        "user_id",
+        "mobile",
+        "username",
+        "sex",
+        "address",
+        "birthday",
+        "email",
+        "status",
+        "operator_id",
+        "operator_name"
+      ]
+    },
+    "ApplicationFormReq": {
+      "type": "object",
+      "title": "ApplicationFormReq"
+    },
+    "ApplicationFormResp": {
+      "type": "object",
+      "properties": {
+        "application_form": {
+          "$ref": "#/definitions/ApplicationForm"
+        }
+      },
+      "title": "ApplicationFormResp",
+      "required": [
+        "application_form"
+      ]
+    },
+    "ApplicationFormsReq": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ApplicationFormsReq",
+      "required": [
+        "page",
+        "page_size"
+      ]
+    },
+    "ApplicationFormsResp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationForm"
+          }
+        }
+      },
+      "title": "ApplicationFormsResp",
+      "required": [
+        "list"
+      ]
+    },
+    "AuthReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "AuthReq",
+      "required": [
+        "mobile",
+        "password"
+      ]
+    },
+    "AuthResp": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "access_expire": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refresh_after": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "AuthResp",
+      "required": [
+        "access_token",
+        "access_expire",
+        "refresh_after"
+      ]
+    },
+    "ChangeRoleReq": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "new_role": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ChangeRoleReq",
+      "required": [
+        "user_id",
+        "new_role"
+      ]
+    },
+    "ChangeRoleResp": {
+      "type": "object",
+      "properties": {
+        "createtime": {
+          "type": "string",
+          "description": " 变动身份时间"
+        },
+        "new_role": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 新身份代号 '0-申请队员 1-岗前培训 2-见习队员 3-正式队员 4-督导老师 30-普通队员 31-核心队员 32-区域负责人 33-组委会成员 34-组委会主任'"
+        },
+        "new_role_name": {
+          "type": "string",
+          "description": " 新身份名称"
+        },
+        "old_role": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 旧身份代号"
+        },
+        "old_role_name": {
+          "type": "string",
+          "description": " 旧身份名称"
+        }
+      },
+      "title": "ChangeRoleResp",
+      "required": [
+        "createtime",
+        "new_role",
+        "new_role_name",
+        "old_role",
+        "old_role_name"
+      ]
+    },
+    "DestroyTokenReq": {
+      "type": "object",
+      "title": "DestroyTokenReq"
+    },
+    "DestroyTokenResp": {
+      "type": "object",
+      "title": "DestroyTokenResp"
+    },
+    "EditReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "address": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      },
+      "title": "EditReq",
+      "required": [
+        "mobile",
+        "username",
+        "sex",
+        "address",
+        "birthday",
+        "email"
+      ]
+    },
+    "EditResp": {
+      "type": "object",
+      "title": "EditResp"
+    },
+    "EditUserInfoReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        }
+      },
+      "title": "EditUserInfoReq",
+      "required": [
+        "mobile",
+        "username",
+        "sex",
+        "email",
+        "address",
+        "birthday"
+      ]
+    },
+    "EditUserInfoResp": {
+      "type": "object",
+      "title": "EditUserInfoResp"
+    },
+    "GetAllApplicantReq": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetAllApplicantReq",
+      "required": [
+        "page",
+        "page_size"
+      ]
+    },
+    "GetAllApplicantResp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      },
+      "title": "GetAllApplicantResp",
+      "required": [
+        "list"
+      ]
+    },
+    "GetByStatusReq": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetByStatusReq",
+      "required": [
+        "status",
+        "page",
+        "page_size"
+      ]
+    },
+    "GetByStatusResp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationForm"
+          }
+        }
+      },
+      "title": "GetByStatusResp",
+      "required": [
+        "list"
+      ]
+    },
+    "GetRescueInfoByAreaReq": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "area": {
+          "type": "string"
+        }
+      },
+      "title": "GetRescueInfoByAreaReq",
+      "required": [
+        "page",
+        "page_size",
+        "area"
+      ]
+    },
+    "GetRescueInfoByAreaResp": {
+      "type": "object",
+      "properties": {
+        "rescue_info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RescueInfo"
+          }
+        }
+      },
+      "title": "GetRescueInfoByAreaResp",
+      "required": [
+        "rescue_info"
+      ]
+    },
+    "GetRescueInfoReq": {
+      "type": "object",
+      "properties": {
+        "page": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "page_size": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetRescueInfoReq",
+      "required": [
+        "page",
+        "page_size"
+      ]
+    },
+    "GetRescueInfoResp": {
+      "type": "object",
+      "properties": {
+        "rescue_info": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RescueInfo"
+          }
+        }
+      },
+      "title": "GetRescueInfoResp",
+      "required": [
+        "rescue_info"
+      ]
+    },
+    "ImportExcelReq": {
+      "type": "object",
+      "title": "ImportExcelReq"
+    },
+    "ImportExcelResp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User"
+          }
+        }
+      },
+      "title": "ImportExcelResp",
+      "required": [
+        "list"
+      ]
+    },
+    "LoginReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      },
+      "title": "LoginReq",
+      "required": [
+        "mobile",
+        "password"
+      ]
+    },
+    "LoginResp": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "access_expire": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refresh_after": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "role": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LoginResp",
+      "required": [
+        "access_token",
+        "access_expire",
+        "refresh_after",
+        "role"
+      ]
+    },
+    "ProcessReq": {
+      "type": "object",
+      "properties": {
+        "application_form_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "ProcessReq",
+      "required": [
+        "application_form_id",
+        "status"
+      ]
+    },
+    "ProcessResp": {
+      "type": "object",
+      "properties": {
+        "createtime": {
+          "type": "string"
+        }
+      },
+      "title": "ProcessResp",
+      "required": [
+        "createtime"
+      ]
+    },
+    "PushReq": {
+      "type": "object",
+      "properties": {
+        "weibo_account": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "string"
+        },
+        "age": {
+          "type": "string"
+        },
+        "release_time": {
+          "type": "string"
+        },
+        "main_demand": {
+          "type": "string"
+        },
+        "risk_level": {
+          "type": "string"
+        }
+      },
+      "title": "PushReq",
+      "required": [
+        "weibo_account",
+        "area",
+        "sex",
+        "age",
+        "release_time",
+        "main_demand",
+        "risk_level"
+      ]
+    },
+    "PushResp": {
+      "type": "object",
+      "title": "PushResp"
+    },
+    "PushWithStatusReq": {
+      "type": "object",
+      "properties": {
+        "weibo_account": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "string"
+        },
+        "age": {
+          "type": "string"
+        },
+        "release_time": {
+          "type": "string"
+        },
+        "main_demand": {
+          "type": "string"
+        },
+        "risk_level": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "title": "PushWithStatusReq",
+      "required": [
+        "weibo_account",
+        "area",
+        "sex",
+        "age",
+        "release_time",
+        "main_demand",
+        "risk_level",
+        "status"
+      ]
+    },
+    "PushWithStatusResp": {
+      "type": "object",
+      "title": "PushWithStatusResp"
+    },
+    "RegisterReq": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        }
+      },
+      "title": "RegisterReq",
+      "required": [
+        "mobile",
+        "password",
+        "username",
+        "sex",
+        "email",
+        "address",
+        "birthday"
+      ]
+    },
+    "RegisterResp": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "access_expire": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refresh_after": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "role": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RegisterResp",
+      "required": [
+        "access_token",
+        "access_expire",
+        "refresh_after",
+        "role"
+      ]
+    },
+    "RescueInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "weibo_account": {
+          "type": "string"
+        },
+        "area": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "string"
+        },
+        "age": {
+          "type": "string"
+        },
+        "release_time": {
+          "type": "string"
+        },
+        "main_demand": {
+          "type": "string"
+        },
+        "risk_level": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rescue_teacher_id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "rescue_teacher_name": {
+          "type": "string"
+        }
+      },
+      "title": "RescueInfo",
+      "required": [
+        "id",
+        "weibo_account",
+        "area",
+        "sex",
+        "age",
+        "release_time",
+        "main_demand",
+        "risk_level",
+        "status",
+        "rescue_teacher_id",
+        "rescue_teacher_name"
+      ]
+    },
+    "RoleChangeInfo": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createtime": {
+          "type": "string",
+          "description": " 变动身份时间"
+        },
+        "user_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 身份变动用户Id"
+        },
+        "username": {
+          "type": "string",
+          "description": " 身份变动用户名称"
+        },
+        "operator_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 操作人"
+        },
+        "operator_name": {
+          "type": "string",
+          "description": " 操作人姓名"
+        },
+        "new_role": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 新身份代号 '0-申请队员 1-岗前培训 2-见习队员 3-正式队员 4-督导老师 30-普通队员 31-核心队员 32-区域负责人 33-组委会成员 34-组委会主任'"
+        },
+        "new_role_name": {
+          "type": "string",
+          "description": " 新身份名称"
+        },
+        "old_role": {
+          "type": "integer",
+          "format": "int64",
+          "description": " 旧身份代号"
+        },
+        "old_role_name": {
+          "type": "string",
+          "description": " 旧身份名称"
+        }
+      },
+      "title": "RoleChangeInfo",
+      "required": [
+        "id",
+        "createtime",
+        "user_id",
+        "username",
+        "operator_id",
+        "operator_name",
+        "new_role",
+        "new_role_name",
+        "old_role",
+        "old_role_name"
+      ]
+    },
+    "RoleChangeInfoListReq": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "RoleChangeInfoListReq",
+      "required": [
+        "user_id"
+      ]
+    },
+    "RoleChangeInfoListResp": {
+      "type": "object",
+      "properties": {
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleChangeInfo"
+          }
+        }
+      },
+      "title": "RoleChangeInfoListResp",
+      "required": [
+        "list"
+      ]
+    },
+    "UploadAvatarReq": {
+      "type": "object",
+      "title": "UploadAvatarReq"
+    },
+    "UploadAvatarResp": {
+      "type": "object",
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      },
+      "title": "UploadAvatarResp",
+      "required": [
+        "url"
+      ]
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "OpenId": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "sex": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "email": {
+          "type": "string"
+        },
+        "role": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "role_name": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "birthday": {
+          "type": "string"
+        }
+      },
+      "title": "User",
+      "required": [
+        "id",
+        "open_id",
+        "mobile",
+        "username",
+        "sex",
+        "email",
+        "role",
+        "role_name",
+        "avatar",
+        "address",
+        "birthday"
+      ]
+    },
+    "UserInfoReq": {
+      "type": "object",
+      "title": "UserInfoReq"
+    },
+    "UserInfoResp": {
+      "type": "object",
+      "properties": {
+        "user_info": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "title": "UserInfoResp",
+      "required": [
+        "user_info"
+      ]
+    },
+    "WXMiniAuthReq": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "iv": {
+          "type": "string"
+        },
+        "encrypted_data": {
+          "type": "string"
+        }
+      },
+      "title": "WXMiniAuthReq",
+      "required": [
+        "code",
+        "iv",
+        "encrypted_data"
+      ]
+    },
+    "WXMiniAuthResp": {
+      "type": "object",
+      "properties": {
+        "access_token": {
+          "type": "string"
+        },
+        "access_expire": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refresh_after": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "WXMiniAuthResp",
+      "required": [
+        "access_token",
+        "access_expire",
+        "refresh_after"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}

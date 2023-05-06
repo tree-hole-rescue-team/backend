@@ -1,0 +1,59 @@
+syntax = "v1"
+
+info(
+	title: "身份"
+	desc: "身份"
+	author: "qianren"
+	email: "1911401642@qq.com"
+)
+
+type (
+    RoleChangeInfo {
+        Id             int64    `json:"id"`
+        CreateTime     string   `json:"createtime"`     // 变动身份时间
+        UserId         int64    `json:"user_id"`         // 身份变动用户Id
+        UserName       string   `json:"username"`       // 身份变动用户名称
+        OperatorId     int64    `json:"operator_id"`     // 操作人
+        OperetorName   string   `json:"operator_name"`   // 操作人姓名
+        NewRole        int64    `json:"new_role"`        // 新身份代号 '0-申请队员 1-岗前培训 2-见习队员 3-正式队员 4-督导老师 30-普通队员 31-核心队员 32-区域负责人 33-组委会成员 34-组委会主任'
+        NewRoleName    string   `json:"new_role_name"`    // 新身份名称
+        OldRole        int64    `json:"old_role"`        // 旧身份代号
+        OldRoleName    string   `json:"old_role_name"`    // 旧身份名称
+    }
+    RoleChangeInfoListReq {
+        UserId      int64       `json:"user_id"`
+    }
+    RoleChangeInfoListResp {
+        List    [] RoleChangeInfo  `json:"list"`
+    }
+)
+
+type (
+    ChangeRoleReq {
+        UserId      int64   `json:"user_id"`
+        NewRole     int64   `json:"new_role"`
+    }
+    ChangeRoleResp {
+        CreateTime     string   `json:"createtime"`      // 变动身份时间
+        NewRole        int64    `json:"new_role"`        // 新身份代号 '0-申请队员 1-岗前培训 2-见习队员 3-正式队员 4-督导老师 30-普通队员 31-核心队员 32-区域负责人 33-组委会成员 34-组委会主任'
+        NewRoleName    string   `json:"new_role_name"`    // 新身份名称
+        OldRole        int64    `json:"old_role"`        // 旧身份代号
+        OldRoleName    string   `json:"old_role_name"`    // 旧身份名称
+    }
+)
+
+@server(
+    prefix: api/v1
+    group: role
+    jwt: JwtAuth
+)
+service app-api {
+    
+    @doc "获取某个成员的身份变动信息"
+	@handler roleChangeList
+	post /role/viewchangelist (RoleChangeInfoListReq) returns (RoleChangeInfoListResp)
+
+    @doc "更改成员身份"
+	@handler changeRole
+	post /role/change (ChangeRoleReq) returns (ChangeRoleResp)
+}
